@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ClockeViewModel extends StateNotifier<DateTime> {
+class ClockNotifier extends StateNotifier<DateTime> {
   late final Timer _timer;
 
   @override
@@ -11,10 +11,13 @@ class ClockeViewModel extends StateNotifier<DateTime> {
     super.dispose();
   }
 
-  ClockeViewModel() : super(DateTime.now()) {
+  ClockNotifier() : super(DateTime.now()) {
     //first thing will happen
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       state = DateTime.now();
     });
   }
 }
+
+final clockProvider =
+    StateNotifierProvider<ClockNotifier, DateTime>((ref) => ClockNotifier());
